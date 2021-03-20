@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-
 import Status from "./Status";
 
-const Cabecalho = (props) => {
+const Cabecalho = () => {
   return (
     <StyledCabecalho>
       <StyledCabecalhoTitulo>Seja bem-vindo ao InfoCão</StyledCabecalhoTitulo>
@@ -13,7 +12,7 @@ const Cabecalho = (props) => {
         imagem bem bonita.
       </StyledCabecalhoText>
 
-      <Status status={props.status} />
+      <Status />
     </StyledCabecalho>
   );
 };

@@ -1,16 +1,13 @@
 import React from "react";
-
-import RacaSelecionada from "./RacaSelecionada";
+import { useRacaSelecionada } from "../context/RacaSelecionadaContext";
 import RacaNaoSelecionada from "./RacaNaoSelecionada";
+import RacaSelecionada from "./RacaSelecionada";
 
-const Raca = (props) => {
-  const racaFoiSelecionada = Boolean(props.raca);
+const Raca = () => {
+  const raca = useRacaSelecionada();
+  const racaFoiSelecionada = Boolean(raca);
 
-  return racaFoiSelecionada ? (
-    <RacaSelecionada {...props} />
-  ) : (
-    <RacaNaoSelecionada />
-  );
+  return racaFoiSelecionada ? <RacaSelecionada /> : <RacaNaoSelecionada />;
 };
 
 export default Raca;

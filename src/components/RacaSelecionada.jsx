@@ -1,18 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import { useRacaSelecionada } from "../context/RacaSelecionadaContext";
 
-const RacaSelecionada = (props) => (
-  <StyledRacaSelecionada>
-    <StyledRacaSelecionadaNome>{props.raca.name}</StyledRacaSelecionadaNome>
-    <StyledRacaSelecionadaInfo>
-      <StyledRacaSelecionadaInfoDescricao>
-        Tempo de vida:
-      </StyledRacaSelecionadaInfoDescricao>
-      {props.raca.life_span}
-    </StyledRacaSelecionadaInfo>
-    <StyledRacaSelecionadaImagem alt="Imagem de raca" src={props.raca.imagem} />
-  </StyledRacaSelecionada>
-);
+const RacaSelecionada = () => {
+  const raca = useRacaSelecionada();
+
+  return (
+    <StyledRacaSelecionada>
+      <StyledRacaSelecionadaNome>{raca.name}</StyledRacaSelecionadaNome>
+      <StyledRacaSelecionadaInfo>
+        <StyledRacaSelecionadaInfoDescricao>
+          Tempo de vida:
+        </StyledRacaSelecionadaInfoDescricao>
+        {raca.life_span}
+      </StyledRacaSelecionadaInfo>
+      <StyledRacaSelecionadaImagem alt="Imagem de raca" src={raca.imagem} />
+    </StyledRacaSelecionada>
+  );
+};
 
 const StyledRacaSelecionada = styled.div`
   width: 300px;

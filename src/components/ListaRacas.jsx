@@ -1,13 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { useRacas } from "../context/RacasContext";
+import { useSelecionaRaca } from "../context/RacaSelecionadaContext";
 
-const ListaRacas = (props) => {
+const ListaRacas = () => {
+  const racas = useRacas();
+  const selecionaRaca = useSelecionaRaca();
+
   return (
     <StyledListaRacas>
-      {props.racas.map((raca) => (
+      {racas.map((raca) => (
         <StyledListaRacasItem
           key={raca.id}
-          onClick={() => props.selecionaRaca(raca.name)}
+          onClick={() => selecionaRaca(raca.name)}
         >
           {raca.name}
         </StyledListaRacasItem>
