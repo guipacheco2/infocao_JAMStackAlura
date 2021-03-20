@@ -1,23 +1,15 @@
-import axios from 'axios'
+const imagensApiUrl = "https://dog.ceo/api";
+const sobreApiUrl = "https://api.thedogapi.com/v1/";
 
-const imagensApiUrl = 'https://dog.ceo/api'
-const sobreApiUrl = 'https://api.thedogapi.com/v1/'
+export const buscaImagemPorRaca = (raca) =>
+  fetch(`${imagensApiUrl}/breed/${raca.toLowerCase()}/images/random`)
+    .then((res) => res.json())
+    .then((res) => res.message);
 
+export const buscaSobreRacas = () =>
+  fetch(`${sobreApiUrl}/breeds`).then((res) => res.json());
 
-const buscaImagemPorRaca = raca => axios
-  .get(`${imagensApiUrl}/breed/${raca.toLowerCase()}/images/random`)
-  .then(resposta => resposta.data.message)
-  
-const buscaSobreRacas = () => axios
-  .get(`${sobreApiUrl}/breeds`)
-  .then(resposta => resposta.data)
-
-const buscaTodasRacas = () => axios
-  .get(`${imagensApiUrl}/breeds/list/all`)
-  .then(resposta => Object.keys(resposta.data.message))
-
-export {
-  buscaImagemPorRaca,
-  buscaSobreRacas,
-  buscaTodasRacas
-}
+export const buscaTodasRacas = () =>
+  fetch(`${imagensApiUrl}/breeds/list/all`)
+    .then((res) => res.json())
+    .then((res) => Object.keys(res.message));
