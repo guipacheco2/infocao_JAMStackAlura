@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { buscaSobreRacas, buscaTodasRacas } from "../api";
 import Cabecalho from "../components/Cabecalho";
 import ListaRacas from "../components/ListaRacas";
 import Raca from "../components/Raca";
@@ -7,22 +8,35 @@ import { RacasContextProvider } from "../context/RacasContext";
 import { RacaSelecionadaContextProvider } from "../context/RacaSelecionadaContext";
 import { StatusContextProvider } from "../context/StatusContext";
 
-export default function HomePage() {
+export default function HomePage({ racas }) {
   return (
     <Theme>
       <StyledContainer>
-        <StatusContextProvider>
-          <Cabecalho />
-          <RacasContextProvider>
+        <RacasContextProvider racas={racas}>
+          <StatusContextProvider>
             <RacaSelecionadaContextProvider>
+              <Cabecalho />
               <Raca />
               <ListaRacas />
             </RacaSelecionadaContextProvider>
-          </RacasContextProvider>
-        </StatusContextProvider>
+          </StatusContextProvider>
+        </RacasContextProvider>
       </StyledContainer>
     </Theme>
   );
+}
+
+export async function getStaticProps() {
+  const [sobreRacas, todasRacas] = await Promise.all([
+    buscaSobreRacas(),
+    buscaTodasRacas(),
+  ]);
+
+  const racas = sobreRacas.filter((sobre) =>
+    todasRacas.includes(sobre.name.toLowerCase())
+  );
+
+  return { props: { racas } };
 }
 
 const StyledContainer = styled.div`
